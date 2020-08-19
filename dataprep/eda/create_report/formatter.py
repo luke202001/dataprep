@@ -11,7 +11,7 @@ from bokeh.models import Title
 from bokeh.plotting import Figure
 
 from ..distribution import compute, render
-from ..distribution.compute import calc_stats
+from ..distribution.compute.overview import calc_stats
 from ..distribution.render import _format_values
 from ..correlation import compute_correlation, render_correlation
 from ..dtypes import Continuous, DateTime, Nominal, detect_dtype, is_dtype
