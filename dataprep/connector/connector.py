@@ -214,7 +214,6 @@ class Connector:
 
         async with ClientSession() as client:
             throttler = self._throttler.session()
-
             if itable.pag_params is None or _count is None:
                 df = await self._fetch(
                     itable, kwargs, _client=client, _throttler=throttler, _auth=_auth,
@@ -222,7 +221,6 @@ class Connector:
                 return df
 
             pag_type = itable.pag_params.type
-
             # pagination begins
             max_per_page = itable.pag_params.max_count
             total = _count
@@ -261,7 +259,6 @@ class Connector:
                 allowed_page = IntRef(n_page)
                 for i in range(n_page):
                     count = max_per_page if i < n_page - 1 else remaining
-
                     resps_coros.append(
                         self._fetch(
                             itable,
@@ -275,13 +272,13 @@ class Connector:
                             _cursor=i * max_per_page,
                         )
                     )
-
                 dfs = []
                 for resp_coro in as_completed(resps_coros):
                     df = await resp_coro
                     if df is not None:
                         dfs.append(df)
-
+                        print(dfs)
+                print(dfs)
             else:
                 raise NotImplementedError
 
